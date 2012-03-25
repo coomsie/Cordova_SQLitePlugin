@@ -209,6 +209,8 @@
         }
     }
     
+    sqlite3_finalize (statement);
+    
     if (errMsg != NULL) {
         [self respond:callback withString:[NSString stringWithFormat:@"{ message: 'SQL statement error : %s' }", errMsg] withType:@"error"];
     } else {
