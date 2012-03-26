@@ -145,4 +145,6 @@ var CDVSQLitePlugin = function() {
 /**
  * Add to PhoneGap constructor
  */
- Cordova.addConstructor(CDVSQLitePlugin);
+
+Cordova.addConstructor(CDVSQLitePlugin);
+

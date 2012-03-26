@@ -41,8 +41,6 @@
 	function onBodyLoad()
         
 	{	
-         mytestest = new CDVSQLitePlugin();
-        console.log(mytestest);
 		document.addEventListener("deviceready", onDeviceReady, false);
   
 	}
@@ -54,8 +52,8 @@
 	function onDeviceReady()
 	{
      
-        var plugin;
-        plugin = new CDVSQLitePlugin("test4_native.sqlite3");
+        var db1;
+        db1 = new CDVSQLitePlugin("test4_native.sqlite3");
         
         //var db;
        // db = plugin.createDB("test3_native.sqlite3");
