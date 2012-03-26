@@ -1,4 +1,4 @@
-(function() {
+function CDVSQLitePlugin(){
 	var callbacks, cbref, counter, getOptions, root;
 	root = this;
 	callbacks = {};
@@ -26,7 +26,8 @@
 		}
 		return opts;
 	};
-	root.CDVSQLitePlugin = (function() {
+    
+	this = (function() {
 		CDVSQLitePlugin.prototype.openDBs = {};
 		function CDVSQLitePlugin(dbPath, openSuccess, openError) {
 			this.dbPath = dbPath;
@@ -96,6 +97,7 @@
 		};
 		return CDVSQLitePlugin;
 	})();
+    
 	root.CDVSQLitePluginTransaction = (function() {
 		function CDVSQLitePluginTransaction(dbPath) {
 			this.dbPath = dbPath;
@@ -132,4 +134,23 @@
 		};
 		return CDVSQLitePluginTransaction;
 	})();
-}).call(this);
+};
+
+ 
+/**
+ * Install function
+ */
+CDVSQLitePlugin.install = function()
+{
+	if ( !window.plugins ) {
+		window.plugins = {};
+	} 
+	if ( !window.plugins.sqlite ) {
+		window.plugins.sqlite = new CDVSQLitePlugin();
+	}
+};
+
+/**
+ * Add to PhoneGap constructor
+ */
+Cordova.addConstructor(CDVSQLitePlugin.install);

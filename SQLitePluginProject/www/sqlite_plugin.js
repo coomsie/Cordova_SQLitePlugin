@@ -7,15 +7,40 @@
 //      Adapted to 1.5 by coomsie
 //
 
-var CDVSQLitePlugin = function(dbPath, openSuccess, openError) {
+/**
+ * Constructor
+ */
 
+function CDVSQLitePlugin(){
+    
+    var root = this;
+    /// vars
+	root.callbacks;
+	root.counter;
+	
+	root.calbacks = callbacks = {};
+	root.counter = 0;
+    
+    root.dbPath = null;
+    
+    this.cbref = function(hash) {
+        var f;
+        f = "cb" + (this.counter += 1);
+        callbacks[f] = hash;
+        return f;
+    };
+    
+    
+    
+};
+
+CDVSQLitePlugin.prototype.openDBs = {};
+    
+CDVSQLitePlugin.prototype.createDB = function(dbPath, openSuccess, openError) {
+    
+    console.log("createDB");
+    
 	/// vars
-	this.callbacks = callbacks;
-	this.counter = counter;
-	this.root = this;
-	this.calbacks = callbacks = {};
-	this.counter = 0;
-
 	this.dbPath = dbPath;
 	this.openSuccess = openSuccess;
 	this.openError = openError;
@@ -29,33 +54,13 @@ var CDVSQLitePlugin = function(dbPath, openSuccess, openError) {
 		console.log(e.message);
 	});
 	this.open(this.openSuccess, this.openError);
-
-	this.cbref = function(hash) {
-		var f;
-		f = "cb" + (counter += 1);
-		callbacks[f] = hash;
-		return f;
+	
+	this.CDVSQLitePluginTransaction = function (dbPath) {
+			this.dbPath = dbPath;
+			this.executes = [];
 	};
-
-	this.getOptions = function(opts, success, error) {
-		var cb, has_cbs;
-		cb = {};
-		has_cbs = false;
-		if( typeof success === "function") {
-			has_cbs = true;
-			cb.success = success;
-		}
-		if( typeof error === "function") {
-			has_cbs = true;
-			cb.error = error;
-		}
-		if(has_cbs) {
-			opts.callback = cbref(cb);
-		}
-		return opts;
-	};
-
 	this.handleCallback = function(ref, type, obj) {
+        console.log('obj');
 		var _ref;
 		if(( _ref = callbacks[ref]) != null) {
 			if( typeof _ref[type] === "function") {
@@ -65,15 +70,29 @@ var CDVSQLitePlugin = function(dbPath, openSuccess, openError) {
 		callbacks[ref] = null;
 		delete callbacks[ref];
 	};
-	
-	this.CDVSQLitePluginTransaction = function (dbPath) {
-			this.dbPath = dbPath;
-			this.executes = [];
-	};
-	
 };
 
-CDVSQLitePlugin.prototype.openDBs = {};
+
+
+CDVSQLitePlugin.prototype.getOptions = function(opts, success, error) {
+    var cb, has_cbs;
+    cb = {};
+    has_cbs = false;
+    if( typeof success === "function") {
+        has_cbs = true;
+        cb.success = success;
+    }
+    if( typeof error === "function") {
+        has_cbs = true;
+        cb.error = error;
+    }
+    if(has_cbs) {
+        opts.callback = this.cbref(cb);
+    }
+    return opts;
+};
+
+
 
 /**
  * Handle callback
@@ -109,13 +128,20 @@ CDVSQLitePlugin.prototype.transaction = function(fn, success, error) {
  */
 
 CDVSQLitePlugin.prototype.open = function(success, error) {
+    console.log('starting open with=>' + this.dbPath);
+
 	var opts;
+    console.log(this.dbPath in this.openDBs) ;
+
 	if(!(this.dbPath in this.openDBs)) {
 		this.openDBs[this.dbPath] = true;
 		opts = this.getOptions({
 			path : this.dbPath
 		}, success, error);
+        console.log(opts);
+        console.log('execute cordova cmd');
 		Cordova.exec("CDVSQLitePlugin.open", opts);
+        console.log('execute cordova cmd fin');
 	}
 };
 /**
@@ -123,12 +149,15 @@ CDVSQLitePlugin.prototype.open = function(success, error) {
  */
 
 CDVSQLitePlugin.prototype.close = function(success, error) {
+    console.log("start closing db");
 	var opts;
+    
 	if(this.dbPath in this.openDBs) {
 		delete this.openDBs[this.dbPath];
 		opts = getOptions({
 			path : this.dbPath
 		}, success, error);
+        
 		Cordova.exec("CDVSQLitePlugin.close", opts);
 	}
 };
@@ -170,9 +199,22 @@ CDVSQLitePlugin.Transaction.prototype.complete = function(success, error) {
 	this.executes = [];
 };
 
-Cordova.addConstructor(function() {
-	if(!window.plugins) {
+
+/**
+ * Install function
+ */
+CDVSQLitePlugin.install = function()
+{
+	if ( !window.plugins ) {
 		window.plugins = {};
+	} 
+	if ( !window.plugins.CDVSQLitePlugin ) {
+		window.plugins.CDVSQLitePlugin = new CDVSQLitePlugin();
 	}
-	window.plugins.CDVSQLitePlugin = new CDVSQLitePlugin();
-});
+};
+
+/**
+ * Add to PhoneGap constructor
+ */
+Cordova.addConstructor(CDVSQLitePlugin.install);
+

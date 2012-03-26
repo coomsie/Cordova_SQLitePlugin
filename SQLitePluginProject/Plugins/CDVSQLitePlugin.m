@@ -24,7 +24,7 @@
         openDBs = [NSMutableDictionary dictionaryWithCapacity:0];
         [openDBs retain];
         
-        CDVFile* pgFile = [[self appDelegate] getCommandInstance: @"com.phonegap.file"];
+        CDVFile* pgFile = [[self appDelegate] getCommandInstance: @"org.apache.cordova.file"];
         NSString *docs = [pgFile appDocsPath];
         [self setAppDocsPath:docs];
 

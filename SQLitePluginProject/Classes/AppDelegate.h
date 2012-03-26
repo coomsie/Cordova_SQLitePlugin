@@ -19,7 +19,7 @@
 
 //
 //  AppDelegate.h
-//  Chartee
+//  
 //
 //  Created by Iain Campion on 18/03/12.
 //  Copyright __MyCompanyName__ 2012. All rights reserved.

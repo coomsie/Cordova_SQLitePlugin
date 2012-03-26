@@ -19,7 +19,7 @@
 
 //
 //  AppDelegate.m
-//  Chartee
+//  
 //
 //  Created by Iain Campion on 18/03/12.
 //  Copyright __MyCompanyName__ 2012. All rights reserved.
@@ -64,7 +64,7 @@
     NSURL* url = [launchOptions objectForKey:UIApplicationLaunchOptionsURLKey];
     if (url && [url isKindOfClass:[NSURL class]]) {
         self.invokeString = [url absoluteString];
-		NSLog(@"Chartee launchOptions = %@", url);
+		NSLog(@"sqLitePlugin launchOptions = %@", url);
     }    
     
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
