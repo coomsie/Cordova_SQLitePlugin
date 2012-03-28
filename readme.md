@@ -59,7 +59,7 @@ General Usage
 
     db.transaction (tx) ->
 
-      tx.executeSql [ "INSERT INTO test_table (data, data_num) VALUES (?,?)", "test", 100], (res) ->
+      tx.executeSql "INSERT INTO test_table (data, data_num) VALUES (?,?)", ["test", 100], (res) ->
 
         # success callback
 
@@ -67,7 +67,7 @@ General Usage
         console.log "rowsAffected: #{res.rowsAffected} -- should be 1"
 
         # check the count (not a part of the transaction)
-        db.executeSql "select count(id) as cnt from test_table;", (res) ->
+        db.executeSql "select count(id) as cnt from test_table;", [], (res) ->
           console.log "rows.length: #{res.rows.length} -- should be 1"
           console.log "rows[0].cnt: #{res.rows[0].cnt} -- should be 1"
 
@@ -79,22 +79,23 @@ General Usage
 
 ## Plain Javascript
 
-    var db;
-    db = new SQLitePlugin("test_native.sqlite3");
-    db.executeSql('DROP TABLE IF EXISTS test_table');
-    db.executeSql('CREATE TABLE IF NOT EXISTS test_table (id integer primary key, data text, data_num integer)');
-    db.transaction(function(tx) {
-      return tx.executeSql(["INSERT INTO test_table (data, data_num) VALUES (?,?)", "test", 100], function(res) {
-        console.log("insertId: " + res.insertId + " -- probably 1");
-        console.log("rowsAffected: " + res.rowsAffected + " -- should be 1");
-        return db.executeSql("select count(id) as cnt from test_table;", function(res) {
-          console.log("rows.length: " + res.rows.length + " -- should be 1");
-          return console.log("rows[0].cnt: " + res.rows[0].cnt + " -- should be 1");
-        });
-      }, function(e) {
-        return console.log("ERROR: " + e.message);
-      });
-    });
+ var db;
+        db = new SQLitePlugin("my_sqlite_database.sqlite3");
+        
+        db.executeSql('DROP TABLE IF EXISTS test_table');
+        db.executeSql('CREATE TABLE IF NOT EXISTS test_table (id integer primary key, data text, data_num integer)');
+        db.transaction(function(tx) {
+                       return tx.executeSql("INSERT INTO test_table (data, data_num) VALUES (?,?)",[ "test", 100], function(res) {
+                                            console.log("insertId: " + res.insertId + " -- probably 1");
+                                            console.log("rowsAffected: " + res.rowsAffected + " -- should be 1");
+                                            return db.executeSql("select count(id) as cnt from test_table;", [], function(res) {
+                                                                 console.log("rows.length: " + res.rows.length + " -- should be 1");
+                                                                 return console.log("rows[0].cnt: " + res.rows[0].cnt + " -- should be 1");
+                                                                 });
+                                            }, function(e) {
+                                            return console.log("ERROR: " + e.message);
+                                            });
+                       });
 
 
 Lawnchair Adapter Usage
