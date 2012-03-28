@@ -38,8 +38,8 @@
 		CD4AFBE41515E0FD00F2A2B0 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD4AFBE31515E0FD00F2A2B0 /* MainViewController.m */; };
 		CD4AFBE61515E0FD00F2A2B0 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD4AFBE51515E0FD00F2A2B0 /* MainViewController.xib */; };
 		CD4AFBEA1515E0FD00F2A2B0 /* verify.sh in Resources */ = {isa = PBXBuildFile; fileRef = CD4AFBE91515E0FD00F2A2B0 /* verify.sh */; };
+		CD5DE9931522F43E00719204 /* SQLitePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = CD5DE9921522F43E00719204 /* SQLitePlugin.m */; };
 		CD79C1D6151EFA3200F42AE4 /* www in Resources */ = {isa = PBXBuildFile; fileRef = CD79C1D5151EFA3200F42AE4 /* www */; };
-		CDF270AC1515E40700B8CD9B /* CDVSQLitePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF270AB1515E40700B8CD9B /* CDVSQLitePlugin.m */; };
 		CDF270AE1515E4C100B8CD9B /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CDF270AD1515E4C100B8CD9B /* libsqlite3.0.dylib */; };
 		CDF270B01515E4CE00B8CD9B /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CDF270AF1515E4CE00B8CD9B /* libsqlite3.dylib */; };
 /* End PBXBuildFile section */
@@ -82,9 +82,9 @@
 		CD4AFBE51515E0FD00F2A2B0 /* MainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainViewController.xib; path = Classes/MainViewController.xib; sourceTree = "<group>"; };
 		CD4AFBE81515E0FD00F2A2B0 /* README */ = {isa = PBXFileReference; lastKnownFileType = text; name = README; path = Plugins/README; sourceTree = "<group>"; };
 		CD4AFBE91515E0FD00F2A2B0 /* verify.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = verify.sh; sourceTree = "<group>"; };
+		CD5DE9911522F43E00719204 /* SQLitePlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SQLitePlugin.h; path = Plugins/SQLitePlugin.h; sourceTree = "<group>"; };
+		CD5DE9921522F43E00719204 /* SQLitePlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SQLitePlugin.m; path = Plugins/SQLitePlugin.m; sourceTree = "<group>"; };
 		CD79C1D5151EFA3200F42AE4 /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; name = www; path = SQLitePluginProject/www; sourceTree = "<group>"; };
-		CDF270AA1515E40700B8CD9B /* CDVSQLitePlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDVSQLitePlugin.h; path = Plugins/CDVSQLitePlugin.h; sourceTree = "<group>"; };
-		CDF270AB1515E40700B8CD9B /* CDVSQLitePlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDVSQLitePlugin.m; path = Plugins/CDVSQLitePlugin.m; sourceTree = "<group>"; };
 		CDF270AD1515E4C100B8CD9B /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		CDF270AF1515E4CE00B8CD9B /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -269,8 +269,8 @@
 		CD4AFBE71515E0FD00F2A2B0 /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
-				CDF270AA1515E40700B8CD9B /* CDVSQLitePlugin.h */,
-				CDF270AB1515E40700B8CD9B /* CDVSQLitePlugin.m */,
+				CD5DE9911522F43E00719204 /* SQLitePlugin.h */,
+				CD5DE9921522F43E00719204 /* SQLitePlugin.m */,
 				CD4AFBE81515E0FD00F2A2B0 /* README */,
 			);
 			name = Plugins;
@@ -377,7 +377,7 @@
 				CD4AFBB91515E0FD00F2A2B0 /* main.m in Sources */,
 				CD4AFBE11515E0FD00F2A2B0 /* AppDelegate.m in Sources */,
 				CD4AFBE41515E0FD00F2A2B0 /* MainViewController.m in Sources */,
-				CDF270AC1515E40700B8CD9B /* CDVSQLitePlugin.m in Sources */,
+				CD5DE9931522F43E00719204 /* SQLitePlugin.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

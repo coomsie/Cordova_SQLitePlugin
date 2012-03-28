@@ -24,7 +24,7 @@
 
 #import "AppDelegate.h"
 
-@interface CDVSQLitePlugin : CDVPlugin {
+@interface SQLitePlugin : CDVPlugin {
     NSMutableDictionary *openDBs;
 }
 

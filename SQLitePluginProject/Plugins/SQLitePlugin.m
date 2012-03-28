@@ -10,16 +10,16 @@
  */
 
 
-#import "CDVSQLitePlugin.h"
+#import "SQLitePlugin.h"
 
-@implementation CDVSQLitePlugin
+@implementation SQLitePlugin
 
 @synthesize openDBs;
 @synthesize appDocsPath;
 
 -(CDVPlugin*) initWithWebView:(UIWebView*)theWebView
 {
-    self = (CDVSQLitePlugin*)[super initWithWebView:theWebView];
+    self = (SQLitePlugin*)[super initWithWebView:theWebView];
     if (self) {
         openDBs = [NSMutableDictionary dictionaryWithCapacity:0];
         [openDBs retain];
@@ -34,7 +34,7 @@
 
 -(void) respond: (id)cb withString:(NSString *)str withType:(NSString *)type {
     if (cb != NULL) {
-        NSString* jsString = [NSString stringWithFormat:@"CDVSQLitePlugin.handleCallback('%@', '%@', %@);", cb, type, str ];
+        NSString* jsString = [NSString stringWithFormat:@"SQLitePlugin.handleCallback('%@', '%@', %@);", cb, type, str ];
         [self writeJavascript:jsString];
     }
 }

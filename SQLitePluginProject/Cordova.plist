@@ -24,8 +24,8 @@
 	<array/>
 	<key>Plugins</key>
 	<dict>
-		<key>CDVSQLitePlugin</key>
-		<string>CDVSQLitePlugin</string>
+		<key>SQLitePlugin</key>
+		<string>SQLitePlugin</string>
 		<key>org.apache.cordova.accelerometer</key>
 		<string>CDVAccelerometer</string>
 		<key>org.apache.cordova.camera</key>
